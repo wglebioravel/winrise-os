@@ -1,0 +1,15 @@
+[General]
+GlobalViewProps=true
+EditableUrl=false
+ShowFullPath=false
+RememberOpenedTabs=false
+ShowStatusBar=true
+ShowZoomSlider=true
+BrowseThroughArchives=true
+
+[MainWindow]
+MenuBar=Disabled
+
+[DetailsMode]
+PreviewSize=22
+ExpandableFolders=false

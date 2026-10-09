@@ -1,0 +1,8 @@
+{
+    "KPlugin": {
+        "Authors": [ { "Name": "WinRise OS" } ],
+        "Id": "WinRise",
+        "License": "MIT",
+        "Name": "WinRise"
+    }
+}

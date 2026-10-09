@@ -1,0 +1,27 @@
+#!/bin/sh
+# Configuração do live-build do WinRise OS (Debian 13 "trixie", amd64, UEFI + BIOS)
+set -e
+lb config noauto \
+  --mode debian \
+  --distribution trixie \
+  --architecture amd64 \
+  --archive-areas "main contrib non-free non-free-firmware" \
+  --parent-archive-areas "main contrib non-free non-free-firmware" \
+  --mirror-bootstrap "http://deb.debian.org/debian/" \
+  --mirror-binary "http://deb.debian.org/debian/" \
+  --security true \
+  --updates true \
+  --linux-flavours amd64 \
+  --apt-recommends true \
+  --firmware-chroot true \
+  --firmware-binary true \
+  --debian-installer none \
+  --binary-images iso-hybrid \
+  --bootloaders "grub-efi,syslinux" \
+  --memtest none \
+  --image-name winrise-os \
+  --iso-application "WinRise OS" \
+  --iso-publisher "WinRise OS - https://github.com/wglebioravel/winrise-os" \
+  --iso-volume "WINRISE_OS" \
+  --bootappend-live "boot=live components quiet locales=pt_BR.UTF-8 keyboard-layouts=br keyboard-model=abnt2 timezone=America/Sao_Paulo username=winrise user-fullname=WinRise hostname=winrise" \
+  "${@}"

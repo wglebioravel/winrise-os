@@ -1,0 +1,16 @@
+#!/bin/sh
+# "Este Computador" do WinRise OS: monta uma visão estilo Windows com as pastas do
+# usuário e os discos/pendrives montados, e abre no Dolphin.
+set -u
+base="${XDG_RUNTIME_DIR:-/tmp/winrise-$(id -u)}"
+dir="$base/Este Computador"
+rm -rf "$dir" && mkdir -p "$dir"
+for k in DESKTOP DOCUMENTS DOWNLOAD PICTURES MUSIC VIDEOS; do
+  p="$(xdg-user-dir "$k" 2>/dev/null)"
+  [ -n "$p" ] && [ "$p" != "$HOME" ] && [ -d "$p" ] && ln -s "$p" "$dir/$(basename "$p")"
+done
+ln -s / "$dir/Disco Local (Sistema)"
+for m in /media/"$USER"/* /run/media/"$USER"/* /mnt/*; do
+  [ -d "$m" ] && ln -s "$m" "$dir/Disco $(basename "$m")"
+done
+exec dolphin --new-window "$dir"

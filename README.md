@@ -1,115 +1,136 @@
 # WinRise OS
 
-Um sistema operacional **feito do zero em Rust** para PCs x86_64 modernos (Intel e AMD).
+**Uma distribuição Linux com a cara do Windows 10 — leve, limpa e sem bloatware.**
 
-O objetivo de longo prazo é uma área de trabalho **parecida com o Windows 10** —
-barra de tarefas embaixo com botão Iniciar, menu Iniciar, janelas com barra de
-título e ícones na área de trabalho — porém **leve e limpa**: sem notícias,
-clima, widgets, anúncios nem aplicativos pré-instalados que você não pediu.
+O WinRise OS é baseado no **Debian 13 (trixie)** com **KDE Plasma 6**, configurado para que
+quem vem do Windows se sinta em casa desde o primeiro clique: barra de tarefas embaixo,
+menu Iniciar, "Este Computador", Lixeira na área de trabalho, Explorador de Arquivos com
+duplo clique e os mesmos atalhos de teclado.
 
-![WinRise OS rodando no QEMU](docs/screenshot.png)
+![Área de trabalho do WinRise OS](docs/screenshot.png)
 
-## Estado atual (marco 0.1)
+## Filosofia
 
-- Boot pelo **Limine** em **UEFI** e **BIOS legado**, a partir de uma única ISO híbrida
-- Kernel `no_std` em Rust, carregado na metade superior da memória (higher-half)
-- **Framebuffer** gráfico com fonte antialiasing e um protótipo da área de trabalho
-  (fundo azul, ícones, janela, barra de tarefas com botão Iniciar e relógio)
-- **Console de texto** dentro da janela "Informações do sistema"
-- **Porta serial** (COM1) para depuração
-- **GDT + TSS** (pilha separada para *double fault*) e **IDT** com tratadores de exceções
-- Leitura do **mapa de memória** (RAM usável), CPU (CPUID), firmware e bootloader
+- **Visual do Windows 10**: barra de tarefas escura e única embaixo, botão Iniciar à esquerda,
+  apps fixados, bandeja do sistema e relógio (hora + data) à direita, botão "mostrar área de
+  trabalho" no canto, janelas claras com botões minimizar/maximizar/fechar à direita.
+- **Leve e limpo**: nada de notícias, clima, widgets, anúncios, "dicas", telemetria ou apps
+  empurrados. Usamos o `kde-plasma-desktop` mínimo (não o `kde-standard`/`kde-full`):
+  sem PIM/Akonadi, sem jogos, sem KDE Connect, sem tela de boas-vindas, sem Konqueror.
+- **Funciona em quase qualquer PC**: kernel Linux do Debian com firmware não-livre incluso
+  (Wi-Fi Intel/Realtek/Atheros/Broadcom/MediaTek, GPUs AMD/Intel, áudio SOF), boot por
+  **UEFI e BIOS legado** a partir da mesma ISO.
+- **Em português do Brasil** por padrão (idioma pt-BR, teclado ABNT2, fuso de São Paulo), com
+  inglês disponível.
 
-## Requisitos de hardware
+## Navegação igual ao Windows (o grande diferencial)
 
-- Processador x86_64 (Intel ou AMD) razoavelmente moderno
-- Pelo menos **8 GB de RAM** (recomendado)
-- Firmware UEFI ou BIOS legado
+| No Windows 10 | No WinRise OS |
+|---|---|
+| Explorador de Arquivos | **Dolphin** configurado como o Explorer: **duplo clique** para abrir, modo **Detalhes** por padrão (nome, data de modificação, tipo, tamanho), barra lateral com Área de trabalho, Documentos, Downloads, Imagens, Música, Vídeos, Lixeira e **discos/pendrives**, barra de endereço em "migalhas" (clique no espaço vazio dela para digitar o caminho), sem barra de menus |
+| Este Computador | Ícone **Este Computador** na área de trabalho e no menu Iniciar: mostra suas pastas, o **Disco Local (Sistema)** e os discos/pendrives montados |
+| Lixeira | Ícone **Lixeira** na área de trabalho |
+| Pasta do usuário | Ícone **Pasta pessoal** na área de trabalho |
+| Pastas do usuário | `Área de trabalho`, `Documentos`, `Downloads`, `Imagens`, `Música`, `Vídeos`, `Modelos`, `Público` já criadas em pt-BR |
+| Menu Iniciar | **Kickoff** com campo de busca (é só começar a digitar), apps **fixados** em grade e **todos os apps por categoria** |
+| Barra de tarefas | Firefox, Explorador (Dolphin) e Loja (Discover) fixados; só ícones, agrupados por app |
+| Botão direito → Novo → Pasta / Documento de texto | **Criar novo → Pasta / Arquivo de texto** na área de trabalho e no Dolphin |
+| Instalar `.exe`/`.msi` com duplo clique | Duplo clique em **`.deb`** abre na **Discover** (loja) para instalar; duplo clique em **AppImage** pergunta e executa (como um `.exe` portátil); Flatpak (`.flatpakref`) abre na Discover |
+| Microsoft Store | **Discover** (pacotes Debian + Flatpak/Flathub) |
 
-## Requisitos para compilar
+### Atalhos de teclado
 
-Em Debian/Ubuntu:
+| Atalho | Ação |
+|---|---|
+| <kbd>Win</kbd> | Abre o menu Iniciar |
+| <kbd>Win</kbd>+<kbd>E</kbd> | Abre o Explorador de Arquivos (Dolphin) |
+| <kbd>Win</kbd>+<kbd>D</kbd> | Mostra a área de trabalho |
+| <kbd>Win</kbd>+<kbd>L</kbd> | Bloqueia a tela |
+| <kbd>Alt</kbd>+<kbd>Tab</kbd> | Alterna entre janelas (com miniaturas) |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd> | Gerenciador de tarefas (Monitor do Sistema) |
+| <kbd>PrtSc</kbd> / <kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> | Captura de tela / recorte de área (Spectacle) |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd> | Terminal (Konsole) |
+| <kbd>Win</kbd>+<kbd>←</kbd>/<kbd>→</kbd> | Encaixar janela na metade da tela |
+
+## O que vem instalado (só o essencial)
+
+| Função | Programa |
+|---|---|
+| Área de trabalho | KDE Plasma 6 (mínimo), SDDM, Wayland (X11 disponível) |
+| Navegador | Firefox ESR (pt-BR) |
+| Arquivos | Dolphin |
+| Terminal | Konsole |
+| Editor de texto | Kate |
+| PDF / Imagens / Compactados / Captura | Okular / Gwenview / Ark / Spectacle |
+| Loja de apps | Discover (Debian + Flatpak) |
+| Gerenciador de tarefas | Monitor do Sistema |
+| Rede / Som / Bluetooth / Impressão | NetworkManager (Wi-Fi), PipeWire, BlueZ, CUPS |
+| Instalador | Calamares |
+
+Removidos de propósito: Plasma Welcome, KDE Connect, Konqueror, KHelpCenter, KWrite,
+integração de navegador, jogos, PIM/Akonadi, widgets de clima/notícias.
+
+## Requisitos
+
+- PC **x86_64 (64 bits)** Intel ou AMD com um bom processador
+- **8 GB de RAM** ou mais
+- 30 GB de disco para instalar
+- UEFI (com Secure Boot desligado nesta versão) ou BIOS legado
+
+## Como gerar a ISO
+
+Num Debian 13 (ou Ubuntu recente) com acesso root, internet e ~20 GB livres:
 
 ```bash
-sudo apt install build-essential git make xorriso qemu-system-x86 ovmf socat imagemagick
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+git clone https://github.com/wglebioravel/winrise-os.git
+cd winrise-os
+make deps     # instala live-build, xorriso, qemu etc.
+make iso      # gera winrise-os-amd64.hybrid.iso (demora 20–60 min)
+make run-uefi # ou: make run-bios — testa no QEMU
 ```
 
-O arquivo `kernel/rust-toolchain.toml` seleciona automaticamente o Rust **nightly**
-com `rust-src` e `llvm-tools`. O Limine é baixado e compilado pelo próprio `Makefile`.
+Para recomeçar do zero: `make clean` (mantém o cache de pacotes) ou `make distclean`.
 
-## Compilar e executar
+## Como gravar no pendrive
 
-```bash
-make iso        # gera winrise-os.iso (BIOS + UEFI)
-make run        # roda no QEMU com BIOS legado
-make run-uefi   # roda no QEMU com UEFI (OVMF)
-make test       # teste automático sem janela, BIOS e UEFI, com captura de tela
-make clean      # limpa os artefatos
-```
+- **Ventoy** (recomendado): instale o Ventoy no pendrive e só copie o arquivo `.iso` para ele.
+- **Rufus** (Windows): selecione a ISO; se perguntar, escolha o modo **DD**.
+- **Linux/macOS** (`dd`) — cuidado, apaga o pendrive inteiro:
+  ```bash
+  sudo dd if=winrise-os-amd64.hybrid.iso of=/dev/sdX bs=4M status=progress oflag=sync
+  ```
 
-A saída serial do kernel aparece no terminal (`-serial stdio`).
+Depois é só dar boot pelo pendrive (F12/F11/F8/Esc no menu de boot do PC). O sistema abre
+direto na área de trabalho (usuário live `winrise`, sem senha). Para instalar, use o ícone
+**Instalar o WinRise OS** na área de trabalho.
 
-## Rodar em um computador de verdade
-
-> ⚠️ Gravar a ISO **apaga todo o conteúdo do pendrive**. Confira o dispositivo duas vezes.
-
-**Linux:**
-
-```bash
-lsblk                                   # descubra o pendrive (ex.: /dev/sdX)
-sudo dd if=winrise-os.iso of=/dev/sdX bs=4M status=progress conv=fsync
-```
-
-**Windows:** use o [Rufus](https://rufus.ie) (modo "DD Image") ou o
-[balenaEtcher](https://etcher.balena.io).
-
-Depois, reinicie o PC, abra o menu de boot (geralmente F12, F8, F11 ou Esc) e
-escolha o pendrive. Em máquinas UEFI pode ser necessário **desativar o Secure Boot**.
-
-## Estrutura do projeto
+## Estrutura do repositório
 
 ```
-kernel/
-  src/main.rs         ponto de entrada (kmain), área de trabalho e informações
-  src/boot.rs         requisições ao bootloader Limine
-  src/framebuffer.rs  desenho de pixels, retângulos, degradê e texto
-  src/console.rs      console de texto sobre o framebuffer (kprintln!)
-  src/serial.rs       driver da porta serial COM1 (serial_println!)
-  src/gdt.rs          GDT e TSS
-  src/interrupts.rs   IDT e tratadores de exceções
-  src/memory.rs       leitura do mapa de memória
-  src/cpu.rs          identificação da CPU (CPUID)
-  linker.ld           layout do kernel na memória
-limine.conf           configuração do menu de boot
-scripts/test-boot.sh  teste automatizado no QEMU
-Makefile
+auto/config                 opções do live-build (Debian trixie, amd64, UEFI+BIOS, pt-BR)
+config/package-lists/       lista de pacotes (base, desktop, apps, firmware, instalador)
+config/hooks/normal/        remoção de bloatware e identidade visual (os-release, Calamares, SDDM)
+config/includes.chroot/     arquivos copiados para o sistema:
+  etc/xdg/                  padrões do KDE (tema, Dolphin, atalhos, associações de arquivos)
+  etc/skel/                 perfil padrão do usuário (ícones da área de trabalho, pastas pt-BR)
+  usr/share/plasma/look-and-feel/org.winrise.desktop/   tema global + layout da barra de tarefas
+  usr/share/wallpapers/WinRise/                         papel de parede (arte própria)
+  usr/local/bin/            "Este Computador" e executor de AppImage
+scripts/make-wallpaper.sh   gera o papel de parede
 ```
 
-## Roadmap
+## Roteiro
 
-**Núcleo do sistema**
-- [x] Boot UEFI + BIOS, framebuffer, serial, GDT/IDT
-- [ ] Gerenciamento de memória: alocador de quadros físicos e paginação própria
-- [ ] Alocador de heap (`alloc`: `Vec`, `String`, `Box`)
-- [ ] APIC/IOAPIC, timer e interrupções de hardware
-- [ ] Teclado e mouse (PS/2 e depois USB)
-- [ ] Multitarefa (agendador preemptivo, threads, multiprocessador)
-- [ ] Modo usuário e chamadas de sistema
-- [ ] Sistema de arquivos (FAT32 primeiro, depois um próprio)
-- [ ] Drivers: AHCI/NVMe, USB (xHCI), rede, ACPI (desligar/reiniciar)
-- [ ] Shell de linha de comando
-
-**Interface gráfica estilo Windows 10 — leve e sem bloatware**
-- [x] Protótipo estático: área de trabalho azul, ícones, janela e barra de tarefas
-- [ ] Compositor de janelas com double buffering
-- [ ] Barra de tarefas funcional: botão Iniciar, janelas abertas, relógio real
-- [ ] Menu Iniciar com busca de aplicativos
-- [ ] Janelas móveis/redimensionáveis com barra de título (minimizar, maximizar, fechar)
-- [ ] Ícones na área de trabalho e explorador de arquivos
-- [ ] Apenas o essencial: terminal, explorador de arquivos, editor de texto e configurações
-- [ ] **Sem** notícias, clima, widgets, anúncios, telemetria ou apps pré-instalados indesejados
+- [x] 0.1 — ISO live com KDE estilo Windows 10, navegação estilo Windows, sem bloatware, instalador Calamares
+- [ ] Tema de janelas/ícones ainda mais próximo do Windows 10 e telas de boot (GRUB/Plymouth) próprias
+- [ ] Central de boas-vindas mínima e opcional (sem propaganda) com drivers NVIDIA em 1 clique
+- [ ] Secure Boot assinado
+- [ ] Busca de arquivos no menu Iniciar com indexação leve
+- [ ] Atualizações automáticas silenciosas e opção de compatibilidade com apps Windows (Wine/Bottles)
+- [ ] Repositório próprio de pacotes `winrise-*` e builds automáticos (GitHub Actions)
 
 ## Licença
 
-[MIT](LICENSE)
+[MIT](LICENSE) para os scripts e configurações deste repositório. Os pacotes do Debian/KDE
+mantêm suas próprias licenças. WinRise OS não é afiliado à Microsoft; "Windows" é marca da
+Microsoft Corporation e é citado apenas como referência de usabilidade.

@@ -1,0 +1,12 @@
+[org.kde.kdecoration2]
+library=org.kde.breeze
+theme=Breeze
+ButtonsOnLeft=M
+ButtonsOnRight=IAX
+
+[TabBox]
+LayoutName=thumbnail_grid
+HighlightWindows=true
+
+[ModifierOnlyShortcuts]
+Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu

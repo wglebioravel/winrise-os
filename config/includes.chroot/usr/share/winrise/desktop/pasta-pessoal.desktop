@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Pasta pessoal
+Name[en]=Home
+Comment=Documentos, Downloads, Imagens e mais
+Icon=user-home
+Exec=dolphin --new-window
+Terminal=false

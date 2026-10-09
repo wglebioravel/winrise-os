@@ -1,0 +1,41 @@
+# KDE Plasma mínimo (sem kde-standard/kde-full: nada de PIM/Akonadi, jogos ou apps extras)
+kde-plasma-desktop
+sddm
+sddm-theme-breeze
+kwin-wayland
+kwin-x11
+xserver-xorg
+plasma-nm
+plasma-pa
+powerdevil
+kscreen
+bluedevil
+kde-config-gtk-style
+breeze-gtk-theme
+xdg-desktop-portal-kde
+polkit-kde-agent-1
+systemsettings
+kinfocenter
+# Áudio (PipeWire)
+pipewire-audio
+wireplumber
+# Rede
+network-manager
+wpasupplicant
+# Bluetooth
+bluez
+# Impressão básica
+cups
+print-manager
+# Fontes
+fonts-noto-core
+fonts-noto-color-emoji
+fonts-liberation
+# Navegação estilo Windows
+plasma-systemmonitor
+xdg-user-dirs
+kio-extras
+ffmpegthumbs
+kdegraphics-thumbnailers
+packagekit
+libfuse2t64

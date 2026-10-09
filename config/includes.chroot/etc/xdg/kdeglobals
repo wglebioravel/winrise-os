@@ -1,0 +1,10 @@
+[General]
+ColorScheme=BreezeLight
+
+[Icons]
+Theme=breeze
+
+[KDE]
+LookAndFeelPackage=org.winrise.desktop
+SingleClick=false
+widgetStyle=Breeze

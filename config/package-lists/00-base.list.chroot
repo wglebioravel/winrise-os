@@ -1,0 +1,20 @@
+# Sistema live
+live-boot
+live-config
+live-config-systemd
+systemd-sysv
+sudo
+locales
+console-setup
+keyboard-configuration
+less
+nano
+curl
+ca-certificates
+# Sistemas de arquivos (pendrives, HDs do Windows)
+ntfs-3g
+exfatprogs
+dosfstools
+# Microcódigo
+intel-microcode
+amd64-microcode

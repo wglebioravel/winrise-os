@@ -1,0 +1,16 @@
+[kwin]
+Show Desktop=Meta+D,Meta+D,Mostrar a área de trabalho
+Walk Through Windows=Alt+Tab,Alt+Tab,Alternar entre janelas
+
+[services][org.kde.dolphin.desktop]
+_launch=Meta+E
+
+[services][org.kde.plasma-systemmonitor.desktop]
+_launch=Ctrl+Shift+Esc
+
+[services][org.kde.konsole.desktop]
+_launch=Ctrl+Alt+T
+
+[services][org.kde.spectacle.desktop]
+_launch=Print
+RectangularRegionScreenShot=Meta+Shift+S

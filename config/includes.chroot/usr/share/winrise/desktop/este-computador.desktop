@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Este Computador
+Name[en]=This PC
+Comment=Suas pastas e discos
+Icon=computer
+Exec=winrise-este-computador
+Terminal=false

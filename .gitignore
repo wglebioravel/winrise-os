@@ -1,16 +1,30 @@
-# Saídas de build
-kernel/target/
-iso_root/
+# Artefatos do live-build
+/.build/
+/cache/
+/chroot/
+/binary/
+/local/
+/config/binary
+/config/bootstrap
+/config/chroot
+/config/common
+/config/source
+/config/build
+/build.log
 *.iso
-*.ppm
-ovmf-vars.fd
-docs/boot-*.png
-
-# Bootloader Limine (baixado automaticamente pelo Makefile)
-/limine/
-
-# Editores / SO
-.vscode/
-.idea/
-*.swp
-.DS_Store
+*.hybrid.iso
+*.img
+*.contents
+*.files
+*.packages
+*.zsync
+chroot.packages.*
+*.qcow2
+*.fd
+/chroot.*
+/binary.*
+/.lock
+# Symlinks criados pelo "lb config" (hooks padrão do live-build)
+/config/hooks/live/
+/config/hooks/normal/[1-9]*.hook.*
+/config/package-lists/live.list.chroot

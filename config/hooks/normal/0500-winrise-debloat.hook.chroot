@@ -1,0 +1,15 @@
+#!/bin/sh
+# Remove apps "empurrados" que não fazem parte da proposta do WinRise OS
+set -e
+BLOAT="plasma-welcome kdeconnect konqueror konqueror-doc khelpcenter kwrite kde-inotify-survey \
+  plasma-browser-integration webext-plasma-browser-integration kgamma keditbookmarks \
+  xterm zutty imagemagick-7.q16 display-im6.q16 debian-reference-common reportbug \
+  kmail korganizer kaddressbook akregator kontact akonadi-server kdepim-runtime \
+  kmahjongg kpat kmines elisa juk dragonplayer kdeplasma-addons kup-backup"
+PURGE=""
+for p in $BLOAT; do
+  dpkg-query -W -f='${Status}' "$p" 2>/dev/null | grep -q "install ok installed" && PURGE="$PURGE $p"
+done
+[ -n "$PURGE" ] && apt-get purge -y $PURGE
+apt-get autoremove --purge -y
+apt-get clean

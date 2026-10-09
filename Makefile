@@ -1,66 +1,49 @@
-# WinRise OS — build do kernel e da ISO híbrida (BIOS + UEFI)
+# WinRise OS — build da ISO live (Debian 13 + KDE Plasma estilo Windows 10)
+# Uso: make deps && make iso
+SHELL := /bin/bash
+ISO   := winrise-os-amd64.hybrid.iso
+SUDO  ?= sudo
+# Limita a memória do mksquashfs (evita OOM em máquinas com pouca RAM livre)
+SQUASH_OPTS ?= -mem 2G
 
-ISO        := winrise-os.iso
-KERNEL     := kernel/target/x86_64-unknown-none/release/kernel
-LIMINE_DIR := limine
-LIMINE_BRANCH := v9.x-binary
-QEMU       := qemu-system-x86_64
-QEMU_MEM   ?= 8G
-QEMU_FLAGS ?= -M q35 -m $(QEMU_MEM) -smp 4 -serial stdio
-OVMF_CODE  ?= $(firstword $(wildcard /usr/share/OVMF/OVMF_CODE_4M.fd /usr/share/OVMF/OVMF_CODE.fd /usr/share/edk2/x64/OVMF_CODE.4m.fd /usr/share/edk2/ovmf/OVMF_CODE.fd /usr/share/ovmf/OVMF.fd))
-OVMF_VARS  ?= $(firstword $(wildcard /usr/share/OVMF/OVMF_VARS_4M.fd /usr/share/OVMF/OVMF_VARS.fd /usr/share/edk2/x64/OVMF_VARS.4m.fd /usr/share/edk2/ovmf/OVMF_VARS.fd))
+.PHONY: help deps config iso clean distclean run-uefi run-bios wallpaper
 
-.PHONY: all kernel iso run run-uefi test clean distclean
+help:
+	@echo "make deps      - instala live-build e dependências (Debian/Ubuntu)"
+	@echo "make iso       - gera $(ISO) (precisa de root, ~20 GB livres e internet)"
+	@echo "make run-uefi  - testa a ISO no QEMU com UEFI (OVMF)"
+	@echo "make run-bios  - testa a ISO no QEMU com BIOS legado"
+	@echo "make clean     - limpa a árvore de build (mantém o cache de pacotes)"
+	@echo "make distclean - limpa tudo, inclusive cache"
 
-all: iso
+deps:
+	$(SUDO) apt-get update
+	$(SUDO) apt-get install -y live-build debootstrap squashfs-tools xorriso mtools dosfstools \
+	  grub-efi-amd64-bin grub-pc-bin syslinux isolinux syslinux-utils qemu-system-x86 ovmf imagemagick
 
-kernel:
-	cd kernel && cargo build --release
+config:
+	$(SUDO) lb config
 
-$(LIMINE_DIR)/limine:
-	rm -rf $(LIMINE_DIR)
-	git clone https://codeberg.org/Limine/Limine.git --branch=$(LIMINE_BRANCH) --depth=1 $(LIMINE_DIR)
-	$(MAKE) -C $(LIMINE_DIR)
-
-iso: $(ISO)
-
-$(ISO): kernel $(LIMINE_DIR)/limine limine.conf
-	rm -rf iso_root
-	mkdir -p iso_root/boot/limine iso_root/EFI/BOOT
-	cp $(KERNEL) iso_root/boot/kernel
-	cp limine.conf $(LIMINE_DIR)/limine-bios.sys $(LIMINE_DIR)/limine-bios-cd.bin \
-	   $(LIMINE_DIR)/limine-uefi-cd.bin iso_root/boot/limine/
-	cp $(LIMINE_DIR)/BOOTX64.EFI $(LIMINE_DIR)/BOOTIA32.EFI iso_root/EFI/BOOT/
-	xorriso -as mkisofs -R -r -J -b boot/limine/limine-bios-cd.bin \
-		-no-emul-boot -boot-load-size 4 -boot-info-table -hfsplus \
-		-apm-block-size 2048 --efi-boot boot/limine/limine-uefi-cd.bin \
-		-efi-boot-part --efi-boot-image --protective-msdos-label \
-		iso_root -o $(ISO)
-	./$(LIMINE_DIR)/limine bios-install $(ISO)
-	rm -rf iso_root
-	@echo "ISO pronta: $(ISO)"
-
-# Boot via BIOS legado (SeaBIOS)
-run: $(ISO)
-	$(QEMU) $(QEMU_FLAGS) -cdrom $(ISO) -boot d
-
-# Boot via UEFI (OVMF)
-run-uefi: $(ISO)
-	@test -n "$(OVMF_CODE)" || (echo "OVMF não encontrado; instale o pacote ovmf" && exit 1)
-	cp $(OVMF_VARS) ovmf-vars.fd 2>/dev/null || true
-	$(QEMU) $(QEMU_FLAGS) \
-		-drive if=pflash,unit=0,format=raw,file=$(OVMF_CODE),readonly=on \
-		$(if $(OVMF_VARS),-drive if=pflash,unit=1,format=raw,file=ovmf-vars.fd) \
-		-cdrom $(ISO) -boot d
+iso: config
+	$(SUDO) env MKSQUASHFS_OPTIONS="$(SQUASH_OPTS)" lb build
+	@ls -lh $(ISO)
 
 clean:
-	cd kernel && cargo clean
-	rm -rf iso_root $(ISO) ovmf-vars.fd
+	$(SUDO) lb clean
 
-distclean: clean
-	rm -rf $(LIMINE_DIR)
+distclean:
+	$(SUDO) lb clean --purge
+	$(SUDO) rm -rf cache
 
-# Teste automatizado headless (BIOS e UEFI) com captura de tela
-test: $(ISO)
-	scripts/test-boot.sh bios docs/boot-bios.png
-	scripts/test-boot.sh uefi docs/boot-uefi.png
+wallpaper:
+	scripts/make-wallpaper.sh artwork/winrise-wallpaper.png 1920x1080
+
+run-uefi:
+	cp /usr/share/OVMF/OVMF_VARS_4M.fd /tmp/winrise-vars.fd
+	qemu-system-x86_64 -enable-kvm -m 8G -smp 4 -cpu host -vga virtio \
+	  -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE_4M.fd \
+	  -drive if=pflash,format=raw,file=/tmp/winrise-vars.fd \
+	  -cdrom $(ISO)
+
+run-bios:
+	qemu-system-x86_64 -enable-kvm -m 8G -smp 4 -cpu host -vga virtio -cdrom $(ISO)

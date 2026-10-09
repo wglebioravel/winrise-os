@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Link
+Name=Lixeira
+Name[en]=Recycle Bin
+Icon=user-trash-full
+EmptyIcon=user-trash
+URL=trash:/

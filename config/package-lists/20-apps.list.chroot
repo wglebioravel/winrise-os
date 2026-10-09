@@ -1,0 +1,15 @@
+# Apenas o essencial
+firefox-esr
+firefox-esr-l10n-pt-br
+dolphin
+konsole
+kate
+ark
+okular
+gwenview
+kde-spectacle
+plasma-discover
+plasma-discover-backend-flatpak
+flatpak
+# Idioma
+hunspell-pt-br

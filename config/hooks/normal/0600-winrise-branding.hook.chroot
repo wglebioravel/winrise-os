@@ -1,0 +1,74 @@
+#!/bin/sh
+# Identidade do WinRise OS
+set -e
+dpkg-divert --quiet --local --rename --add /usr/lib/os-release || true
+cat > /usr/lib/os-release <<'OSR'
+PRETTY_NAME="WinRise OS 0.1"
+NAME="WinRise OS"
+VERSION_ID="0.1"
+VERSION="0.1 (base Debian 13 trixie)"
+VERSION_CODENAME=trixie
+DEBIAN_VERSION_FULL=13
+ID=winrise
+ID_LIKE=debian
+HOME_URL="https://github.com/wglebioravel/winrise-os"
+SUPPORT_URL="https://github.com/wglebioravel/winrise-os/issues"
+BUG_REPORT_URL="https://github.com/wglebioravel/winrise-os/issues"
+LOGO=winrise
+OSR
+ln -sf ../usr/lib/os-release /etc/os-release
+echo "WinRise OS 0.1 \n \l" > /etc/issue
+echo "WinRise OS 0.1" > /etc/issue.net
+
+# Calamares: nome do produto
+for b in /etc/calamares/branding/*/branding.desc; do
+  [ -f "$b" ] || continue
+  sed -i -E \
+    -e 's/^(\s*productName:).*/\1 "WinRise OS"/' \
+    -e 's/^(\s*shortProductName:).*/\1 "WinRise"/' \
+    -e 's/^(\s*versionedName:).*/\1 "WinRise OS 0.1"/' \
+    -e 's/^(\s*shortVersionedName:).*/\1 "WinRise 0.1"/' \
+    -e 's/^(\s*bootloaderEntryName:).*/\1 "WinRise"/' \
+    -e 's/^(\s*productUrl:).*/\1 "https:\/\/github.com\/wglebioravel\/winrise-os"/' \
+    -e 's/^(\s*supportUrl:).*/\1 "https:\/\/github.com\/wglebioravel\/winrise-os\/issues"/' \
+    "$b"
+done
+for f in /usr/share/applications/calamares-install-debian.desktop /usr/share/applications/install-debian.desktop; do
+  [ -f "$f" ] || continue
+  sed -i -E -e 's/^Name=.*/Name=Instalar o WinRise OS/' -e 's/^Name\[[^]]*\]=.*//' \
+            -e 's/^Comment=.*/Comment=Instalar o WinRise OS neste computador/' -e 's/^Comment\[[^]]*\]=.*//' \
+            -e 's/^Icon=.*/Icon=winrise/' "$f"
+done
+# GRUB do sistema instalado
+if [ -f /etc/default/grub ]; then
+  sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="WinRise OS"/' /etc/default/grub
+fi
+
+# SDDM (tela de login) com o papel de parede WinRise
+if [ -d /usr/share/sddm/themes/breeze ]; then
+  printf '[General]\nbackground=/usr/share/wallpapers/WinRise/contents/images/1920x1080.png\ntype=image\n' \
+    > /usr/share/sddm/themes/breeze/theme.conf.user
+fi
+
+
+# Locale padrão
+sed -i -e 's/^# *pt_BR.UTF-8/pt_BR.UTF-8/' -e 's/^# *en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
+locale-gen
+printf 'LANG=pt_BR.UTF-8\nLANGUAGE=pt_BR:pt:en\n' > /etc/default/locale
+printf 'XKBMODEL="abnt2"\nXKBLAYOUT="br"\nXKBVARIANT=""\nXKBOPTIONS=""\nBACKSPACE="guess"\n' > /etc/default/keyboard
+
+gtk-update-icon-cache -f /usr/share/icons/hicolor >/dev/null 2>&1 || true
+update-desktop-database /usr/share/applications >/dev/null 2>&1 || true
+
+# O script do Debian que põe "Install Debian" na área de trabalho não usa aspas e quebra
+# pastas com espaço ("Área de trabalho" vira "Área", "de", "trabalho"). O WinRise cria
+# esse atalho pelo /etc/profile.d/winrise-session.sh, então desativamos o original.
+# (o gerador de autostart do systemd lê qualquer arquivo da pasta, então desviamos para fora dela)
+mkdir -p /usr/share/winrise/disabled-autostart
+dpkg-divert --quiet --local --rename \
+  --divert /usr/share/winrise/disabled-autostart/calamares-desktop-icon.desktop \
+  --add /etc/xdg/autostart/calamares-desktop-icon.desktop || true
+
+# Políticas do Firefox também no caminho de distribuição (garante leitura pelo ESR)
+mkdir -p /usr/lib/firefox-esr/distribution
+cp /etc/firefox/policies/policies.json /usr/lib/firefox-esr/distribution/policies.json
