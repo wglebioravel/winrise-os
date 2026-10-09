@@ -28,3 +28,5 @@ chroot.packages.*
 /config/hooks/live/
 /config/hooks/normal/[1-9]*.hook.*
 /config/package-lists/live.list.chroot
+*.iso*
+*box-store-snap*
