@@ -20,9 +20,13 @@ duplo clique e os mesmos atalhos de teclado.
 |---|---|---|
 | ![Menu Iniciar](docs/winrise-startmenu.png) | ![Dolphin](docs/winrise-dolphin.png) | ![Este Computador](docs/winrise-este-computador.png) |
 
-| Instalador (Calamares com a identidade WinRise) |
+| Instalador (Calamares com a identidade WinRise) | Menu de boot (UEFI e BIOS) |
+|---|---|
+| ![Instalador WinRise OS](docs/winrise-calamares.png) | ![Menu de boot](docs/winrise-bootmenu.png) |
+
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd> abre o Monitor do Sistema |
 |---|
-| ![Instalador WinRise OS](docs/winrise-calamares.png) |
+| ![Monitor do sistema](docs/winrise-sysmonitor.png) |
 
 ## Filosofia
 
