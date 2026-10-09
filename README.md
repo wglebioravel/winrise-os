@@ -9,6 +9,10 @@ duplo clique e os mesmos atalhos de teclado.
 
 ![Área de trabalho do WinRise OS](docs/screenshot.png)
 
+| Menu Iniciar | Explorador de arquivos (Dolphin) | Este Computador |
+|---|---|---|
+| ![Menu Iniciar](docs/winrise-startmenu.png) | ![Dolphin](docs/winrise-dolphin.png) | ![Este Computador](docs/winrise-este-computador.png) |
+
 ## Filosofia
 
 - **Visual do Windows 10**: barra de tarefas escura e única embaixo, botão Iniciar à esquerda,
