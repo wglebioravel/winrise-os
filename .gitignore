@@ -1,0 +1,16 @@
+# Saídas de build
+kernel/target/
+iso_root/
+*.iso
+*.ppm
+ovmf-vars.fd
+docs/boot-*.png
+
+# Bootloader Limine (baixado automaticamente pelo Makefile)
+/limine/
+
+# Editores / SO
+.vscode/
+.idea/
+*.swp
+.DS_Store
