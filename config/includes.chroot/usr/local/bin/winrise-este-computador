@@ -1,16 +1,20 @@
 #!/bin/sh
-# "Este Computador" do WinRise OS: monta uma visão estilo Windows com as pastas do
-# usuário e os discos/pendrives montados, e abre no Dolphin.
+# "Este Computador" do WinRise OS: uma pasta com atalhos para as pastas do usuário e
+# para os discos/pendrives montados, aberta no Dolphin. Ela aparece como um local
+# ("Este Computador") na barra lateral, então a barra de endereço mostra só
+# "Este Computador" em vez de um caminho técnico.
+# Uso: winrise-este-computador [--refresh]   (--refresh só atualiza, sem abrir)
 set -u
-base="${XDG_RUNTIME_DIR:-/tmp/winrise-$(id -u)}"
-dir="$base/Este Computador"
-rm -rf "$dir" && mkdir -p "$dir"
+dir="$HOME/.local/share/winrise/Este Computador"
+mkdir -p "$dir"
+find "$dir" -mindepth 1 -maxdepth 1 -type l -delete 2>/dev/null
 for k in DESKTOP DOCUMENTS DOWNLOAD PICTURES MUSIC VIDEOS; do
   p="$(xdg-user-dir "$k" 2>/dev/null)"
-  [ -n "$p" ] && [ "$p" != "$HOME" ] && [ -d "$p" ] && ln -s "$p" "$dir/$(basename "$p")"
+  [ -n "$p" ] && [ "$p" != "$HOME" ] && [ -d "$p" ] && ln -sfn "$p" "$dir/$(basename "$p")"
 done
-ln -s / "$dir/Disco Local (Sistema)"
-for m in /media/"$USER"/* /run/media/"$USER"/* /mnt/*; do
-  [ -d "$m" ] && ln -s "$m" "$dir/Disco $(basename "$m")"
+ln -sfn / "$dir/Disco Local (Sistema)"
+for m in /media/"$USER"/* /run/media/"$USER"/*; do
+  [ -d "$m" ] && ln -sfn "$m" "$dir/Disco $(basename "$m")"
 done
+[ "${1:-}" = "--refresh" ] && exit 0
 exec dolphin --new-window "$dir"

@@ -19,5 +19,31 @@ if [ -n "${HOME:-}" ] && [ "$(id -u)" -ne 0 ] && command -v xdg-user-dirs-update
         fi
         : > "$HOME/.config/winrise/desktop-icons-done"
     fi
+    # "Este Computador" na barra lateral do Dolphin (o KIO completa os outros locais padrão)
+    if [ -x /usr/local/bin/winrise-este-computador ]; then
+        /usr/local/bin/winrise-este-computador --refresh >/dev/null 2>&1 || true
+        _wr_places="$HOME/.local/share/user-places.xbel"
+        if [ ! -e "$_wr_places" ]; then
+            _wr_url="file://$(printf '%s' "$HOME/.local/share/winrise/Este Computador" | sed 's/ /%20/g')"
+            cat > "$_wr_places" <<XBEL
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xbel>
+<xbel xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info" xmlns:kdepriv="http://www.kde.org/kdepriv">
+ <bookmark href="$_wr_url">
+  <title>Este Computador</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="computer"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>winrise-este-computador</ID>
+   </metadata>
+  </info>
+ </bookmark>
+</xbel>
+XBEL
+        fi
+        unset _wr_places _wr_url
+    fi
     unset _wr_desk _wr_f
 fi
