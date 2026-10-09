@@ -17,14 +17,13 @@ kickoff.writeConfig("favoritesDisplay", 0);      // fixados em grade
 kickoff.writeConfig("applicationsDisplay", 1);   // categorias em lista
 kickoff.writeConfig("showActionButtonCaptions", true);
 kickoff.writeConfig("favorites", [
-    "applications:firefox-esr.desktop",
-    "applications:org.kde.dolphin.desktop",
-    "applications:org.kde.discover.desktop",
-    "applications:org.kde.kate.desktop",
-    "applications:org.kde.konsole.desktop",
-    "applications:org.kde.okular.desktop",
-    "applications:org.kde.gwenview.desktop",
-    "applications:systemsettings.desktop"
+    "firefox-esr.desktop",
+    "org.kde.dolphin.desktop",
+    "org.kde.kate.desktop",
+    "org.kde.konsole.desktop",
+    "systemsettings.desktop",
+    "org.kde.discover.desktop",
+    "org.kde.plasma-systemmonitor.desktop"
 ]);
 
 // Barra de tarefas só com ícones (como no Windows 10), apps fixados

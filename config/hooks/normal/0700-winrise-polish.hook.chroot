@@ -1,0 +1,26 @@
+#!/bin/sh
+# Ajustes finos do WinRise OS
+set -e
+FAVS="firefox-esr.desktop,org.kde.dolphin.desktop,org.kde.kate.desktop,org.kde.konsole.desktop,systemsettings.desktop,org.kde.discover.desktop,org.kde.plasma-systemmonitor.desktop"
+
+# 1) Favoritos do menu Iniciar (padrão do Kickoff, vale para qualquer sessão nova)
+K=/usr/share/plasma/plasmoids/org.kde.plasma.kickoff/contents/config/main.xml
+if [ -f "$K" ]; then
+  sed -i "s|<default>preferred://browser,org.kde.kontact.desktop,systemsettings.desktop,org.kde.dolphin.desktop,org.kde.discover.desktop</default>|<default>${FAVS}</default>|" "$K"
+  grep -q "$FAVS" "$K" || echo "AVISO: favoritos do Kickoff não aplicados" >&2
+fi
+
+# 2) Ctrl+Shift+Esc abre o Monitor do Sistema (como o Gerenciador de Tarefas)
+SM=/usr/share/applications/org.kde.plasma-systemmonitor.desktop
+if [ -f "$SM" ]; then
+  sed -i 's/^X-KDE-Shortcuts=.*/X-KDE-Shortcuts=Ctrl+Shift+Esc,Meta+Esc/' "$SM"
+fi
+
+# 3) Descrições de tipos de arquivo em pt-BR ("Pasta" em vez de "Folder")
+python3 /usr/share/winrise/tools/mime-l10n.py pt_BR
+update-mime-database /usr/share/mime
+
+# 4) Instalador Calamares com a identidade do WinRise
+if [ -f /etc/calamares/settings.conf ] && [ -d /etc/calamares/branding/winrise ]; then
+  sed -i 's/^branding:.*/branding: winrise/' /etc/calamares/settings.conf
+fi
