@@ -15,7 +15,7 @@ lb config noauto \
   --updates true \
   --linux-flavours amd64 \
   --apt-recommends true \
-  --apt-options "--yes -o Acquire::Retries=10 -o Acquire::Retries::Delay::Maximum=30" \
+  --apt-options "--yes -o Acquire::Retries=10 -o Acquire::Retries::Delay::Maximum=30 -o Acquire::http::Pipeline-Depth=0" \
   --firmware-chroot true \
   --firmware-binary true \
   --debian-installer none \
