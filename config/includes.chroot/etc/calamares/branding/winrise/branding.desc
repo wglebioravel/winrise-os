@@ -1,0 +1,39 @@
+---
+# Identidade do WinRise OS no instalador Calamares
+componentName:  winrise
+welcomeStyleCalamares: false
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 900px,620px
+windowPlacement: center
+
+strings:
+    productName:         "WinRise OS"
+    shortProductName:    "WinRise"
+    version:             "0.1"
+    shortVersion:        "0.1"
+    versionedName:       "WinRise OS 0.1"
+    shortVersionedName:  "WinRise 0.1"
+    bootloaderEntryName: "WinRise"
+    productUrl:          "https://github.com/wglebioravel/winrise-os"
+    supportUrl:          "https://github.com/wglebioravel/winrise-os/issues"
+    knownIssuesUrl:      "https://github.com/wglebioravel/winrise-os/issues"
+    releaseNotesUrl:     "https://github.com/wglebioravel/winrise-os#readme"
+    donateUrl:           ""
+
+sidebar: widget
+navigation: widget
+
+images:
+    productLogo:         "winrise-logo.png"
+    productIcon:         "winrise-logo.png"
+    productWelcome:      "welcome.png"
+
+slideshow:               "show.qml"
+slideshowAPI:            2
+
+style:
+   SidebarBackground:        "#0b2550"
+   SidebarText:              "#FFFFFF"
+   SidebarTextCurrent:       "#FFFFFF"
+   SidebarBackgroundCurrent: "#1f6fd1"
