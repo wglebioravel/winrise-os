@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/winrise-logo-light.png">
+    <img src="docs/winrise-logo.png" alt="Logo do WinRise OS" width="160">
+  </picture>
+</p>
+
 # WinRise OS
 
 **Uma distribuição Linux com a cara do Windows 10 — leve, limpa e sem bloatware.**
@@ -131,8 +138,18 @@ config/includes.chroot/     arquivos copiados para o sistema:
   usr/share/plasma/look-and-feel/org.winrise.desktop/   tema global + layout da barra de tarefas
   usr/share/wallpapers/WinRise/                         papel de parede (arte própria)
   usr/local/bin/            "Este Computador" e executor de AppImage
+artwork/                    logo oficial (original JPG, SVG vetorizado, variante clara, favicon)
+scripts/make-logo.py        vetoriza o logo oficial (fundo transparente, SVG por camadas de cor)
+scripts/make-branding.py    gera ícones, logo do instalador e a tela do menu de boot
 scripts/make-wallpaper.sh   gera o papel de parede
 ```
+
+### Identidade visual
+
+O logo oficial (W preto, R cinza e seta laranja subindo) fica em `artwork/`. Em fundos escuros
+— barra de tarefas, menu de boot, barra lateral do instalador e papel de parede — usamos a
+variante clara (`winrise-logo-light.svg`, com o W branco). `make branding` regera tudo a partir
+de `artwork/winrise-logo-original.jpg`.
 
 ## Roteiro
 

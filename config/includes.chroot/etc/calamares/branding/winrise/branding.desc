@@ -26,7 +26,7 @@ navigation: widget
 
 images:
     productLogo:         "winrise-logo.png"
-    productIcon:         "winrise-logo.png"
+    productIcon:         "winrise-icon.png"
     productWelcome:      "welcome.png"
 
 slideshow:               "show.qml"
