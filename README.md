@@ -13,6 +13,10 @@ duplo clique e os mesmos atalhos de teclado.
 |---|---|---|
 | ![Menu Iniciar](docs/winrise-startmenu.png) | ![Dolphin](docs/winrise-dolphin.png) | ![Este Computador](docs/winrise-este-computador.png) |
 
+| Instalador (Calamares com a identidade WinRise) |
+|---|
+| ![Instalador WinRise OS](docs/winrise-calamares.png) |
+
 ## Filosofia
 
 - **Visual do Windows 10**: barra de tarefas escura e única embaixo, botão Iniciar à esquerda,
@@ -94,6 +98,13 @@ make run-uefi # ou: make run-bios — testa no QEMU
 ```
 
 Para recomeçar do zero: `make clean` (mantém o cache de pacotes) ou `make distclean`.
+
+Dicas para máquinas com pouca RAM ou rede instável:
+
+- Limite o `mksquashfs`: `make iso SQUASH_OPTS="-mem 1G -processors 2"`.
+- O apt já tenta de novo automaticamente (`Acquire::Retries`) quando o espelho Debian
+  devolve erros temporários (500); se ainda assim falhar no fim, rode `make iso` de novo.
+- Faça o build num disco local (ex.: `/var/tmp`), fora de pastas sincronizadas.
 
 ## Como gravar no pendrive
 

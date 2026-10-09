@@ -11,10 +11,11 @@ if [ -f "$K" ]; then
 fi
 
 # 2) Ctrl+Shift+Esc abre o Monitor do Sistema (como o Gerenciador de Tarefas)
-SM=/usr/share/applications/org.kde.plasma-systemmonitor.desktop
-if [ -f "$SM" ]; then
-  sed -i 's/^X-KDE-Shortcuts=.*/X-KDE-Shortcuts=Ctrl+Shift+Esc,Meta+Esc/' "$SM"
-fi
+# O kglobalaccel do Plasma 6 lê a cópia em /usr/share/kglobalaccel; corrigir as duas.
+for SM in /usr/share/applications/org.kde.plasma-systemmonitor.desktop \
+          /usr/share/kglobalaccel/org.kde.plasma-systemmonitor.desktop; do
+  [ -f "$SM" ] && sed -i 's/^X-KDE-Shortcuts=.*/X-KDE-Shortcuts=Ctrl+Shift+Esc,Meta+Esc/' "$SM"
+done
 
 # 3) Descrições de tipos de arquivo em pt-BR ("Pasta" em vez de "Folder")
 python3 /usr/share/winrise/tools/mime-l10n.py pt_BR
