@@ -33,3 +33,10 @@ SS=/usr/share/applications/systemsettings.desktop
 # macOS (Spotlight): Win+S também abre a busca rápida (KRunner), além de Alt+Espaço
 KR=/usr/share/kglobalaccel/org.kde.krunner.desktop
 [ -f "$KR" ] && sed -i '0,/^X-KDE-Shortcuts=Alt+Space,/s//X-KDE-Shortcuts=Alt+Space,Meta+S,/' "$KR"
+
+# Okular aparece no menu como "Leitor de PDF" (nome amigável, estilo Windows)
+OK=/usr/share/applications/org.kde.okular.desktop
+if [ -f "$OK" ]; then
+  sed -i '0,/^Name\[pt_BR\]=.*/s//Name[pt_BR]=Leitor de PDF (Okular)/' "$OK"
+  grep -q '^Name\[pt_BR\]=' "$OK" || sed -i '0,/^Name=.*/s//&\nName[pt_BR]=Leitor de PDF (Okular)/' "$OK"
+fi
