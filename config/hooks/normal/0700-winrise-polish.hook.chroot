@@ -1,7 +1,7 @@
 #!/bin/sh
 # Ajustes finos do WinRise Connect OS
 set -e
-FAVS="google-chrome.desktop,org.kde.dolphin.desktop,winrise-google-docs.desktop,winrise-google-sheets.desktop,winrise-google-gmail.desktop,firefox-esr.desktop,org.kde.kate.desktop,org.kde.konsole.desktop,systemsettings.desktop,org.kde.discover.desktop,org.kde.plasma-systemmonitor.desktop"
+FAVS="google-chrome.desktop,org.kde.dolphin.desktop,winrise-google-docs.desktop,winrise-google-sheets.desktop,winrise-google-gmail.desktop,winrise-este-computador.desktop,systemsettings.desktop,kcm_printer_manager.desktop,org.kde.discover.desktop,org.kde.plasma-systemmonitor.desktop,firefox-esr.desktop,org.kde.kate.desktop,org.kde.konsole.desktop"
 
 # 1) Favoritos do menu Iniciar (padrão do Kickoff, vale para qualquer sessão nova)
 K=/usr/share/plasma/plasmoids/org.kde.plasma.kickoff/contents/config/main.xml
@@ -25,3 +25,11 @@ update-mime-database /usr/share/mime
 if [ -f /etc/calamares/settings.conf ] && [ -d /etc/calamares/branding/winrise ]; then
   sed -i 's/^branding:.*/branding: winrise/' /etc/calamares/settings.conf
 fi
+
+# Windows XP/7: "Painel de Controle" como nome das Configurações do sistema
+SS=/usr/share/applications/systemsettings.desktop
+[ -f "$SS" ] && sed -i '0,/^Name\[pt_BR\]=.*/s//Name[pt_BR]=Painel de Controle/' "$SS"
+
+# macOS (Spotlight): Win+S também abre a busca rápida (KRunner), além de Alt+Espaço
+KR=/usr/share/kglobalaccel/org.kde.krunner.desktop
+[ -f "$KR" ] && sed -i '0,/^X-KDE-Shortcuts=Alt+Space,/s//X-KDE-Shortcuts=Alt+Space,Meta+S,/' "$KR"

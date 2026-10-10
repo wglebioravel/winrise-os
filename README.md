@@ -42,6 +42,24 @@ duplo clique e os mesmos atalhos de teclado.
 - **Em português do Brasil** por padrão (idioma pt-BR, teclado ABNT2, fuso de São Paulo), com
   inglês disponível.
 
+## O melhor de cada mundo
+
+O WinRise Connect OS não é só um clone do Windows 10: junta o que cada sistema faz de melhor,
+com a identidade própria da marca (azul-marinho, turquesa e dourado).
+
+| Recurso | Como usar | Inspirado em |
+|---|---|---|
+| Barra de tarefas embaixo, menu Iniciar com busca, Explorador de Arquivos | <kbd>Win</kbd>, <kbd>Win</kbd>+<kbd>E</kbd> | Windows 10 |
+| Barra de tarefas e menus de "vidro" translúcido com desfoque | automático | Windows 7 (Aero) |
+| Encaixar janelas: arraste para a borda (metade), canto (quarto) ou topo (maximizar) | arrastar a janela | Windows 7 (Aero Snap) |
+| Espiar a área de trabalho no canto direito da barra | passar o mouse / clicar | Windows 7 (Aero Peek) |
+| Miniaturas das janelas ao passar o mouse na barra; arquivos recentes no botão direito | passar o mouse / botão direito | Windows 7 |
+| Atalhos rápidos no menu Iniciar: Este Computador, Painel de Controle, Impressoras | menu Iniciar | Windows XP |
+| "Painel de Controle" (Configurações do sistema) com nomes simples | menu Iniciar | Windows XP |
+| Busca rápida flutuando no centro da tela (apps, arquivos, contas, conversões) | <kbd>Alt</kbd>+<kbd>Espaço</kbd> ou <kbd>Win</kbd>+<kbd>S</kbd> | macOS (Spotlight) |
+| Visão geral de todas as janelas e áreas de trabalho | canto superior esquerdo ou <kbd>Win</kbd>+<kbd>W</kbd> | macOS (Mission Control) |
+| Animações suaves e cantos arredondados nas janelas (tema Breeze) | automático | macOS |
+
 ## Navegação igual ao Windows (o grande diferencial)
 
 | No Windows 10 | No WinRise Connect OS |

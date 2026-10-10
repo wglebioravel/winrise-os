@@ -10,3 +10,23 @@ HighlightWindows=true
 
 [ModifierOnlyShortcuts]
 Meta=org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu
+
+# --- O melhor de cada mundo ---
+# Windows 7 (Aero): vidro desfocado na barra de tarefas, menus e popups
+[Plugins]
+blurEnabled=true
+contrastEnabled=true
+
+[Effect-blur]
+BlurStrength=10
+NoiseStrength=2
+
+# Windows 7 (Aero Snap): arrastar para as bordas/cantos = metade/quarto da tela, topo = maximizar
+[Windows]
+ElectricBorderMaximize=true
+ElectricBorderTiling=true
+ElectricBorderCornerRatio=0.1
+
+# macOS (Mission Control): canto superior esquerdo abre a Visão geral das janelas
+[Effect-overview]
+BorderActivate=7

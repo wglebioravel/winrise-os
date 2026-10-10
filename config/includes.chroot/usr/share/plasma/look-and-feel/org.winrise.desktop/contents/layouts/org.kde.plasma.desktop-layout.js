@@ -6,6 +6,8 @@ panel.location = "bottom";
 panel.height = 2 * Math.ceil(gridUnit * 2.4 / 2);
 panel.hiding = "none";
 try { panel.floating = false; } catch (e) {}
+// Windows 7 (Aero): barra de tarefas translúcida com desfoque (efeito blur do KWin)
+try { panel.opacity = "translucent"; } catch (e) {}
 
 // Menu Iniciar (Kickoff: busca, fixados e categorias)
 var kickoff = panel.addWidget("org.kde.plasma.kickoff");
@@ -17,17 +19,21 @@ kickoff.writeConfig("favoritesDisplay", 0);      // fixados em grade
 kickoff.writeConfig("applicationsDisplay", 1);   // categorias em lista
 kickoff.writeConfig("showActionButtonCaptions", true);
 kickoff.writeConfig("favorites", [
+    // apps do dia a dia
     "google-chrome.desktop",
     "org.kde.dolphin.desktop",
     "winrise-google-docs.desktop",
     "winrise-google-sheets.desktop",
     "winrise-google-gmail.desktop",
+    // atalhos rápidos estilo Windows XP/7: Este Computador, Painel de Controle, Impressoras...
+    "winrise-este-computador.desktop",
+    "systemsettings.desktop",
+    "kcm_printer_manager.desktop",
+    "org.kde.discover.desktop",
+    "org.kde.plasma-systemmonitor.desktop",
     "firefox-esr.desktop",
     "org.kde.kate.desktop",
-    "org.kde.konsole.desktop",
-    "systemsettings.desktop",
-    "org.kde.discover.desktop",
-    "org.kde.plasma-systemmonitor.desktop"
+    "org.kde.konsole.desktop"
 ]);
 
 // Barra de tarefas só com ícones (como no Windows 10), apps fixados

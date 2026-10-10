@@ -1,0 +1,4 @@
+# macOS (Spotlight): a busca rápida (Alt+Espaço ou Win+S) aparece flutuando no centro da tela
+[General]
+FreeFloating=true
+ActivateWhenTypingOnDesktop=true
