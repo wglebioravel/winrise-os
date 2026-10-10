@@ -1,5 +1,5 @@
 #!/bin/sh
-# "Este Computador" do WinRise OS: uma pasta com atalhos para as pastas do usuário e
+# "Este Computador" do WinRise Connect OS: uma pasta com atalhos para as pastas do usuário e
 # para os discos/pendrives montados, aberta no Dolphin. Ela aparece como um local
 # ("Este Computador") na barra lateral, então a barra de endereço mostra só
 # "Este Computador" em vez de um caminho técnico.

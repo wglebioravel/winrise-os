@@ -1,4 +1,4 @@
-# WinRise OS: no login gráfico, cria as pastas do usuário no idioma do sistema
+# WinRise Connect OS: no login gráfico, cria as pastas do usuário no idioma do sistema
 # (Área de trabalho, Documentos, Downloads, Imagens, Músicas, Vídeos...) e coloca os
 # ícones "Este Computador", "Pasta pessoal" e "Lixeira" na área de trabalho, como no Windows.
 # Obs.: não colocamos pastas com acento no /etc/skel porque a cópia na criação do

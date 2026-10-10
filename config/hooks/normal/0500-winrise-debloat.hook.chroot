@@ -1,5 +1,5 @@
 #!/bin/sh
-# Remove apps "empurrados" que não fazem parte da proposta do WinRise OS
+# Remove apps "empurrados" que não fazem parte da proposta do WinRise Connect OS
 set -e
 BLOAT="plasma-welcome kdeconnect konqueror konqueror-doc khelpcenter kwrite kde-inotify-survey \
   plasma-browser-integration webext-plasma-browser-integration kgamma keditbookmarks \

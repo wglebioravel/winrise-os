@@ -1,47 +1,47 @@
 #!/bin/sh
-# Identidade do WinRise OS
+# Identidade do WinRise Connect OS
 set -e
 dpkg-divert --quiet --local --rename --add /usr/lib/os-release || true
 cat > /usr/lib/os-release <<'OSR'
-PRETTY_NAME="WinRise OS 0.1"
-NAME="WinRise OS"
-VERSION_ID="0.1"
-VERSION="0.1 (base Debian 13 trixie)"
+PRETTY_NAME="WinRise Connect OS 0.2"
+NAME="WinRise Connect OS"
+VERSION_ID="0.2"
+VERSION="0.2 (base Debian 13 trixie)"
 VERSION_CODENAME=trixie
 DEBIAN_VERSION_FULL=13
 ID=winrise
 ID_LIKE=debian
-HOME_URL="https://github.com/wglebioravel/winrise-os"
-SUPPORT_URL="https://github.com/wglebioravel/winrise-os/issues"
-BUG_REPORT_URL="https://github.com/wglebioravel/winrise-os/issues"
+HOME_URL="https://github.com/wglebioravel/winrise-connect-os"
+SUPPORT_URL="https://github.com/wglebioravel/winrise-connect-os/issues"
+BUG_REPORT_URL="https://github.com/wglebioravel/winrise-connect-os/issues"
 LOGO=winrise
 OSR
 ln -sf ../usr/lib/os-release /etc/os-release
-echo "WinRise OS 0.1 \n \l" > /etc/issue
-echo "WinRise OS 0.1" > /etc/issue.net
+echo "WinRise Connect OS 0.2 \n \l" > /etc/issue
+echo "WinRise Connect OS 0.2" > /etc/issue.net
 
 # Calamares: nome do produto
 for b in /etc/calamares/branding/*/branding.desc; do
   [ -f "$b" ] || continue
   sed -i -E \
-    -e 's/^(\s*productName:).*/\1 "WinRise OS"/' \
+    -e 's/^(\s*productName:).*/\1 "WinRise Connect OS"/' \
     -e 's/^(\s*shortProductName:).*/\1 "WinRise"/' \
-    -e 's/^(\s*versionedName:).*/\1 "WinRise OS 0.1"/' \
-    -e 's/^(\s*shortVersionedName:).*/\1 "WinRise 0.1"/' \
+    -e 's/^(\s*versionedName:).*/\1 "WinRise Connect OS 0.2"/' \
+    -e 's/^(\s*shortVersionedName:).*/\1 "WinRise Connect 0.2"/' \
     -e 's/^(\s*bootloaderEntryName:).*/\1 "WinRise"/' \
-    -e 's/^(\s*productUrl:).*/\1 "https:\/\/github.com\/wglebioravel\/winrise-os"/' \
-    -e 's/^(\s*supportUrl:).*/\1 "https:\/\/github.com\/wglebioravel\/winrise-os\/issues"/' \
+    -e 's/^(\s*productUrl:).*/\1 "https:\/\/github.com\/wglebioravel\/winrise-connect-os"/' \
+    -e 's/^(\s*supportUrl:).*/\1 "https:\/\/github.com\/wglebioravel\/winrise-connect-os\/issues"/' \
     "$b"
 done
 for f in /usr/share/applications/calamares-install-debian.desktop /usr/share/applications/install-debian.desktop; do
   [ -f "$f" ] || continue
-  sed -i -E -e 's/^Name=.*/Name=Instalar o WinRise OS/' -e 's/^Name\[[^]]*\]=.*//' \
-            -e 's/^Comment=.*/Comment=Instalar o WinRise OS neste computador/' -e 's/^Comment\[[^]]*\]=.*//' \
+  sed -i -E -e 's/^Name=.*/Name=Instalar o WinRise Connect OS/' -e 's/^Name\[[^]]*\]=.*//' \
+            -e 's/^Comment=.*/Comment=Instalar o WinRise Connect OS neste computador/' -e 's/^Comment\[[^]]*\]=.*//' \
             -e 's/^Icon=.*/Icon=winrise/' "$f"
 done
 # GRUB do sistema instalado
 if [ -f /etc/default/grub ]; then
-  sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="WinRise OS"/' /etc/default/grub
+  sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="WinRise Connect OS"/' /etc/default/grub
 fi
 
 # SDDM (tela de login) com o papel de parede WinRise

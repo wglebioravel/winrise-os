@@ -3,7 +3,7 @@
 f="$1"
 [ -f "$f" ] || exit 1
 if [ ! -x "$f" ]; then
-  if kdialog --title "WinRise OS" --yesno "Executar o aplicativo \"$(basename "$f")\"?\n\nSó execute programas de fontes confiáveis."; then
+  if kdialog --title "WinRise Connect OS" --yesno "Executar o aplicativo \"$(basename "$f")\"?\n\nSó execute programas de fontes confiáveis."; then
     chmod +x "$f" || exit 1
   else
     exit 0

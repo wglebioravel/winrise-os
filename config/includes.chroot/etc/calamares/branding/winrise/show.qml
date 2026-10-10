@@ -1,4 +1,4 @@
-/* Apresentação exibida durante a instalação do WinRise OS */
+/* Apresentação exibida durante a instalação do WinRise Connect OS */
 import QtQuick 2.0;
 import calamares.slideshow 1.0;
 
@@ -35,7 +35,7 @@ Presentation
         }
         Text {
             id: title0
-            text: "Bem-vindo ao WinRise OS"
+            text: "Bem-vindo ao WinRise Connect OS"
             color: "white"
             font.pixelSize: 30
             font.bold: true

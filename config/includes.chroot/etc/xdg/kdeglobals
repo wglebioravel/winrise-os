@@ -1,5 +1,8 @@
 [General]
 ColorScheme=BreezeLight
+# Cor de destaque turquesa da marca (#01A3B0)
+AccentColor=1,163,176
+LastUsedCustomAccentColor=1,163,176
 
 [Icons]
 Theme=breeze

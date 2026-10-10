@@ -1,5 +1,5 @@
 ---
-# Identidade do WinRise OS no instalador Calamares
+# Identidade do WinRise Connect OS no instalador Calamares
 componentName:  winrise
 welcomeStyleCalamares: false
 welcomeExpandingLogo: true
@@ -8,17 +8,17 @@ windowSize: 900px,620px
 windowPlacement: center
 
 strings:
-    productName:         "WinRise OS"
+    productName:         "WinRise Connect OS"
     shortProductName:    "WinRise"
-    version:             "0.1"
-    shortVersion:        "0.1"
-    versionedName:       "WinRise OS 0.1"
-    shortVersionedName:  "WinRise 0.1"
+    version:             "0.2"
+    shortVersion:        "0.2"
+    versionedName:       "WinRise Connect OS 0.2"
+    shortVersionedName:  "WinRise Connect 0.2"
     bootloaderEntryName: "WinRise"
-    productUrl:          "https://github.com/wglebioravel/winrise-os"
-    supportUrl:          "https://github.com/wglebioravel/winrise-os/issues"
-    knownIssuesUrl:      "https://github.com/wglebioravel/winrise-os/issues"
-    releaseNotesUrl:     "https://github.com/wglebioravel/winrise-os#readme"
+    productUrl:          "https://github.com/wglebioravel/winrise-connect-os"
+    supportUrl:          "https://github.com/wglebioravel/winrise-connect-os/issues"
+    knownIssuesUrl:      "https://github.com/wglebioravel/winrise-connect-os/issues"
+    releaseNotesUrl:     "https://github.com/wglebioravel/winrise-connect-os#readme"
     donateUrl:           ""
 
 sidebar: widget

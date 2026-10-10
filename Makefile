@@ -1,7 +1,9 @@
-# WinRise OS — build da ISO live (Debian 13 + KDE Plasma estilo Windows 10)
+# WinRise Connect OS — build da ISO live (Debian 13 + KDE Plasma estilo Windows 10)
 # Uso: make deps && make iso
 SHELL := /bin/bash
-ISO   := winrise-os-amd64.hybrid.iso
+VERSION ?= 0.2
+LBISO := winrise-connect-os-amd64.hybrid.iso
+ISO   := winrise-connect-os-$(VERSION)-amd64.iso
 SUDO  ?= sudo
 # Limita a memória do mksquashfs (evita OOM em máquinas com pouca RAM livre)
 SQUASH_OPTS ?= -mem 2G
@@ -27,6 +29,7 @@ config:
 
 iso: config
 	$(SUDO) env MKSQUASHFS_OPTIONS="$(SQUASH_OPTS)" lb build
+	$(SUDO) mv -f $(LBISO) $(ISO)
 	@ls -lh $(ISO)
 
 clean:
@@ -38,14 +41,16 @@ distclean:
 
 WPDIR = config/includes.chroot/usr/share/wallpapers/WinRise/contents/images
 
+# Papel de parede em 16:9, 16:10, 4:3 e 1366x768: o Plasma escolhe o mais próximo da tela
+WPSIZES = 1920x1080 2560x1440 3840x2160 1366x768 1920x1200 2560x1600 1280x1024 1600x1200 1024x768
+
 wallpaper:
-	scripts/make-wallpaper.sh $(WPDIR)/1920x1080.png 1920x1080
-	scripts/make-wallpaper.sh $(WPDIR)/3840x2160.png 3840x2160
+	for s in $(WPSIZES); do scripts/make-wallpaper.sh $(WPDIR)/$$s.png $$s; done
 	cp $(WPDIR)/1920x1080.png artwork/winrise-wallpaper.png
 
 # Regera logo vetorial, ícones, Calamares, tela de boot e papel de parede a partir do logo oficial
 branding:
-	python3 scripts/make-logo.py artwork/winrise-logo-original.jpg artwork
+	python3 scripts/make-logo.py artwork/winrise-connect-logo-original.jpg artwork
 	python3 scripts/make-branding.py
 	$(MAKE) wallpaper
 

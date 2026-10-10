@@ -1,13 +1,13 @@
 {
     "KPackageStructure": "Plasma/LookAndFeel",
     "KPlugin": {
-        "Authors": [ { "Name": "WinRise OS" } ],
+        "Authors": [ { "Name": "WinRise Connect OS" } ],
         "Description": "Visual estilo Windows 10: barra de tarefas escura, janelas claras, sem bloatware",
         "Icon": "winrise",
         "Id": "org.winrise.desktop",
         "License": "MIT",
         "Name": "WinRise",
-        "Version": "0.1"
+        "Version": "0.2"
     },
     "X-Plasma-APIVersion": "2"
 }

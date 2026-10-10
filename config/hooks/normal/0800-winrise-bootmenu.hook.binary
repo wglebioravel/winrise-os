@@ -1,10 +1,10 @@
 #!/bin/sh
-# Nomes do menu de boot (GRUB/UEFI e ISOLINUX/BIOS) com a marca WinRise OS
+# Nomes do menu de boot (GRUB/UEFI e ISOLINUX/BIOS) com a marca WinRise Connect OS
 set -e
 for f in boot/grub/grub.cfg boot/grub/*.cfg; do
   [ -f "$f" ] || continue
-  sed -i -e 's/menuentry "Live system ([^"]* fail-safe mode)"/menuentry "WinRise OS (modo de segurança)"/' \
-         -e 's/menuentry "Live system ([^"]*)"/menuentry "Iniciar o WinRise OS (live)"/' \
+  sed -i -e 's/menuentry "Live system ([^"]* fail-safe mode)"/menuentry "WinRise Connect OS (modo de segurança)"/' \
+         -e 's/menuentry "Live system ([^"]*)"/menuentry "Iniciar o WinRise Connect OS (live)"/' \
          -e "s/submenu 'Utilities\.\.\.'/submenu 'Utilitários...'/" \
          -e "s/menuentry \"UEFI Firmware Settings\"/menuentry \"Configurações do firmware UEFI\"/" -e "s/menuentry \"Verify integrity of the boot medium\"/menuentry \"Verificar a integridade da mídia\"/" \
          -e "s/submenu .Advanced install options \.\.\.'/submenu 'Opções avançadas de instalação...'/" "$f"
