@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=WinRise: busca rápida pré-carregada
+Name[pt_BR]=WinRise: busca rápida pré-carregada
+Comment=Deixa a busca (Alt+Espaço / Win+S) pronta já no login, para abrir na hora
+Exec=krunner --daemon
+OnlyShowIn=KDE;
+NoDisplay=true
+X-KDE-autostart-phase=2

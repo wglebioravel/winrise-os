@@ -1,0 +1,3 @@
+# Windows 7 (Aero): barra de tarefas sempre translúcida (vidro com desfoque do KWin)
+[PlasmaViews][Panel 2]
+panelOpacity=2

@@ -24,9 +24,13 @@ duplo clique e os mesmos atalhos de teclado.
 |---|---|
 | ![Instalador WinRise Connect OS](docs/winrise-calamares.png) | ![Menu de boot](docs/winrise-bootmenu.png) |
 
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd> abre o Monitor do Sistema |
-|---|
-| ![Monitor do sistema](docs/winrise-sysmonitor.png) |
+| Visão geral no canto superior esquerdo (estilo Mission Control) | Google Chrome pré-instalado |
+|---|---|
+| ![Visão geral das janelas](docs/winrise-overview.png) | ![Google Chrome](docs/winrise-chrome.png) |
+
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd> abre o Monitor do Sistema | Menu de boot no BIOS legado |
+|---|---|
+| ![Monitor do sistema](docs/winrise-sysmonitor.png) | ![Menu de boot BIOS](docs/winrise-bootmenu-bios.png) |
 
 ## Filosofia
 

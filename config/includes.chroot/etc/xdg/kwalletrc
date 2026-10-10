@@ -1,0 +1,5 @@
+# WinRise: sem o assistente/senha da Carteira do KDE ao abrir o Chrome ou o portal.
+# O Chrome usa então o armazenamento próprio de senhas; o Wi-Fi fica salvo pelo NetworkManager.
+[Wallet]
+Enabled=false
+First Use=false
