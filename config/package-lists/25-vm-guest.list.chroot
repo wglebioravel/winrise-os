@@ -1,0 +1,7 @@
+# Integração com máquinas virtuais (cada serviço só ativa no hypervisor correspondente)
+# QEMU/KVM e virt-manager
+qemu-guest-agent
+spice-vdagent
+# VMware (Workstation/Player). VirtualBox Guest Additions não estão no Debian 13: ver README.
+open-vm-tools
+open-vm-tools-desktop

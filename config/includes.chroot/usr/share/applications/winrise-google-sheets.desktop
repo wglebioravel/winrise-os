@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Google Planilhas
+Comment=Planilhas online (Google Sheets)
+Exec=google-chrome-stable --app=https://docs.google.com/spreadsheets/
+Icon=winrise-google-sheets
+Categories=Office;Spreadsheet;
+StartupWMClass=docs.google.com__spreadsheets
+TryExec=google-chrome-stable

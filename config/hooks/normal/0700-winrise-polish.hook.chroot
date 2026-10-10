@@ -1,7 +1,7 @@
 #!/bin/sh
-# Ajustes finos do WinRise OS
+# Ajustes finos do WinRise Connect OS
 set -e
-FAVS="firefox-esr.desktop,org.kde.dolphin.desktop,org.kde.kate.desktop,org.kde.konsole.desktop,systemsettings.desktop,org.kde.discover.desktop,org.kde.plasma-systemmonitor.desktop"
+FAVS="google-chrome.desktop,org.kde.dolphin.desktop,winrise-google-docs.desktop,winrise-google-sheets.desktop,winrise-google-gmail.desktop,firefox-esr.desktop,org.kde.kate.desktop,org.kde.konsole.desktop,systemsettings.desktop,org.kde.discover.desktop,org.kde.plasma-systemmonitor.desktop"
 
 # 1) Favoritos do menu Iniciar (padrão do Kickoff, vale para qualquer sessão nova)
 K=/usr/share/plasma/plasmoids/org.kde.plasma.kickoff/contents/config/main.xml

@@ -1,20 +1,20 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/winrise-logo-light.png">
-    <img src="docs/winrise-logo.png" alt="Logo do WinRise OS" width="160">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/winrise-lockup-light.png">
+    <img src="docs/winrise-lockup.png" alt="Logo do WinRise Connect OS" width="220">
   </picture>
 </p>
 
-# WinRise OS
+# WinRise Connect OS
 
 **Uma distribuição Linux com a cara do Windows 10 — leve, limpa e sem bloatware.**
 
-O WinRise OS é baseado no **Debian 13 (trixie)** com **KDE Plasma 6**, configurado para que
+O WinRise Connect OS é baseado no **Debian 13 (trixie)** com **KDE Plasma 6**, configurado para que
 quem vem do Windows se sinta em casa desde o primeiro clique: barra de tarefas embaixo,
 menu Iniciar, "Este Computador", Lixeira na área de trabalho, Explorador de Arquivos com
 duplo clique e os mesmos atalhos de teclado.
 
-![Área de trabalho do WinRise OS](docs/screenshot.png)
+![Área de trabalho do WinRise Connect OS](docs/screenshot.png)
 
 | Menu Iniciar | Explorador de arquivos (Dolphin) | Este Computador |
 |---|---|---|
@@ -22,7 +22,7 @@ duplo clique e os mesmos atalhos de teclado.
 
 | Instalador (Calamares com a identidade WinRise) | Menu de boot (UEFI e BIOS) |
 |---|---|
-| ![Instalador WinRise OS](docs/winrise-calamares.png) | ![Menu de boot](docs/winrise-bootmenu.png) |
+| ![Instalador WinRise Connect OS](docs/winrise-calamares.png) | ![Menu de boot](docs/winrise-bootmenu.png) |
 
 | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd> abre o Monitor do Sistema |
 |---|
@@ -44,7 +44,7 @@ duplo clique e os mesmos atalhos de teclado.
 
 ## Navegação igual ao Windows (o grande diferencial)
 
-| No Windows 10 | No WinRise OS |
+| No Windows 10 | No WinRise Connect OS |
 |---|---|
 | Explorador de Arquivos | **Dolphin** configurado como o Explorer: **duplo clique** para abrir, modo **Detalhes** por padrão (nome, data de modificação, tipo, tamanho), barra lateral com Área de trabalho, Documentos, Downloads, Imagens, Música, Vídeos, Lixeira e **discos/pendrives**, barra de endereço em "migalhas" (clique no espaço vazio dela para digitar o caminho), sem barra de menus |
 | Este Computador | Ícone **Este Computador** na área de trabalho e no menu Iniciar: mostra suas pastas, o **Disco Local (Sistema)** e os discos/pendrives montados |
@@ -76,14 +76,17 @@ duplo clique e os mesmos atalhos de teclado.
 | Função | Programa |
 |---|---|
 | Área de trabalho | KDE Plasma 6 (mínimo), SDDM, Wayland (X11 disponível) |
-| Navegador | Firefox ESR (pt-BR) |
+| Navegador | **Google Chrome** (padrão, fixado na barra; repositório oficial do Google com atualizações automáticas) e Firefox ESR (pt-BR, configurado para ser mais leve) |
+| Escritório | **Google Docs, Planilhas, Apresentações, Gmail e Drive** no menu Iniciar › Escritório (abrem em janela própria pelo Chrome) — sem LibreOffice |
 | Arquivos | Dolphin |
 | Terminal | Konsole |
 | Editor de texto | Kate |
 | PDF / Imagens / Compactados / Captura | Okular / Gwenview / Ark / Spectacle |
 | Loja de apps | Discover (Debian + Flatpak) |
 | Gerenciador de tarefas | Monitor do Sistema |
-| Rede / Som / Bluetooth / Impressão | NetworkManager (Wi-Fi), PipeWire, BlueZ, CUPS |
+| Rede / Som / Bluetooth | NetworkManager + applet Wi-Fi do Plasma, wpasupplicant, PipeWire, BlueZ + Bluedevil |
+| Impressoras e scanners | CUPS + Gerenciador de impressão do Plasma, drivers HP (HPLIP), Epson (ESC/P-R), Canon e outras (Gutenprint, Foomatic), Samsung/Xerox (SpliX), Brother (brlaser); impressoras de rede/Wi-Fi sem driver (IPP Everywhere/AirPrint via Avahi e ipp-usb); scanners com sane-airscan + Skanlite |
+| Máquinas virtuais | qemu-guest-agent, spice-vdagent, open-vm-tools (cada um só ativa no seu hypervisor) |
 | Instalador | Calamares |
 
 Removidos de propósito: Plasma Welcome, KDE Connect, Konqueror, KHelpCenter, KWrite,
@@ -96,15 +99,38 @@ integração de navegador, jogos, PIM/Akonadi, widgets de clima/notícias.
 - 30 GB de disco para instalar
 - UEFI (com Secure Boot desligado nesta versão) ou BIOS legado
 
+### Hardware incluído
+
+- **Wi-Fi**: firmware Intel (iwlwifi), Realtek, Atheros/Qualcomm, Broadcom (brcm80211), MediaTek e
+  outros (`firmware-misc-nonfree`), além de vídeo AMD/Intel e som Intel (SOF).
+- **Impressoras**: na maioria dos casos é só ligar (USB) ou estar na mesma rede Wi-Fi — o CUPS
+  encontra impressoras compatíveis com IPP Everywhere/AirPrint sozinho. Para as demais, use
+  *Configurações do sistema › Impressoras › Adicionar*.
+
+## Testar no VirtualBox
+
+O VirtualBox não tem aceleração 3D real para Linux, então navegadores ficam mais lentos que no
+PC de verdade. Para a melhor experiência:
+
+- **Sistema**: 4 CPUs, **4 a 6 GB de RAM**, *Habilitar EFI* (opcional) e VT-x/AMD-V ativado
+  na BIOS do PC (no Windows, desative o Hyper-V/"Plataforma de Máquina Virtual" se o
+  VirtualBox ficar muito lento ou mostrar uma tartaruga verde).
+- **Tela**: controlador **VMSVGA** (o recomendado para Linux), 128 MB de vídeo. Se a tela ficar
+  preta ou travar, teste **VBoxSVGA**. Avisos do kernel como `vmwgfx ... unsupported hypervisor`
+  com VMSVGA são inofensivos.
+- **Guest Additions**: não estão no Debian 13; o sistema funciona sem elas (redimensionar a tela
+  automaticamente e área de transferência compartilhada dependem delas).
+- No QEMU/KVM (virt-manager) e no VMware a integração já vem pronta.
+
 ## Como gerar a ISO
 
 Num Debian 13 (ou Ubuntu recente) com acesso root, internet e ~20 GB livres:
 
 ```bash
-git clone https://github.com/wglebioravel/winrise-os.git
-cd winrise-os
+git clone https://github.com/wglebioravel/winrise-connect-os.git
+cd winrise-connect-os
 make deps     # instala live-build, xorriso, qemu etc.
-make iso      # gera winrise-os-amd64.hybrid.iso (demora 20–60 min)
+make iso      # gera winrise-connect-os-0.2-amd64.iso (demora 20–60 min)
 make run-uefi # ou: make run-bios — testa no QEMU
 ```
 
@@ -123,12 +149,12 @@ Dicas para máquinas com pouca RAM ou rede instável:
 - **Rufus** (Windows): selecione a ISO; se perguntar, escolha o modo **DD**.
 - **Linux/macOS** (`dd`) — cuidado, apaga o pendrive inteiro:
   ```bash
-  sudo dd if=winrise-os-amd64.hybrid.iso of=/dev/sdX bs=4M status=progress oflag=sync
+  sudo dd if=winrise-connect-os-0.2-amd64.iso of=/dev/sdX bs=4M status=progress oflag=sync
   ```
 
 Depois é só dar boot pelo pendrive (F12/F11/F8/Esc no menu de boot do PC). O sistema abre
 direto na área de trabalho (usuário live `winrise`, sem senha). Para instalar, use o ícone
-**Instalar o WinRise OS** na área de trabalho.
+**Instalar o WinRise Connect OS** na área de trabalho.
 
 ## Estrutura do repositório
 
@@ -150,14 +176,17 @@ scripts/make-wallpaper.sh   gera o papel de parede
 
 ### Identidade visual
 
-O logo oficial (W preto, R cinza e seta laranja subindo) fica em `artwork/`. Em fundos escuros
-— barra de tarefas, menu de boot, barra lateral do instalador e papel de parede — usamos a
-variante clara (`winrise-logo-light.svg`, com o W branco). `make branding` regera tudo a partir
-de `artwork/winrise-logo-original.jpg`.
+O logo oficial (W azul-marinho, R turquesa e seta dourada subindo, com "WinRise Connect") fica
+em `artwork/`: o símbolo sozinho (`winrise-logo.svg`) e o logo completo (`winrise-lockup.svg`).
+Em fundos escuros — barra de tarefas, menu de boot, instalador e papel de parede (símbolo
+centralizado) — usamos as variantes claras (`*-light.svg`, com o W e o "Win" brancos). A cor de
+destaque do tema é o turquesa da marca (#01A3B0). `make branding` regera tudo a partir
+de `artwork/winrise-connect-logo-original.jpg`.
 
 ## Roteiro
 
 - [x] 0.1 — ISO live com KDE estilo Windows 10, navegação estilo Windows, sem bloatware, instalador Calamares
+- [x] 0.2 — novo nome e logo (WinRise Connect OS), Google Chrome + apps Google, impressoras/scanners, integração com VMs
 - [ ] Tema de janelas/ícones ainda mais próximo do Windows 10 e telas de boot (GRUB/Plymouth) próprias
 - [ ] Central de boas-vindas mínima e opcional (sem propaganda) com drivers NVIDIA em 1 clique
 - [ ] Secure Boot assinado
@@ -168,5 +197,5 @@ de `artwork/winrise-logo-original.jpg`.
 ## Licença
 
 [MIT](LICENSE) para os scripts e configurações deste repositório. Os pacotes do Debian/KDE
-mantêm suas próprias licenças. WinRise OS não é afiliado à Microsoft; "Windows" é marca da
+mantêm suas próprias licenças. WinRise Connect OS não é afiliado à Microsoft; "Windows" é marca da
 Microsoft Corporation e é citado apenas como referência de usabilidade.

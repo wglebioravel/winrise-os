@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Gmail
+Comment=E-mail do Google
+Exec=google-chrome-stable --app=https://mail.google.com/mail/
+Icon=winrise-google-gmail
+Categories=Office;Email;Network;
+StartupWMClass=mail.google.com__mail
+TryExec=google-chrome-stable

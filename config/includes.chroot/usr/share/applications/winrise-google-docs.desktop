@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Google Docs
+Comment=Documentos de texto online (Google Docs)
+Exec=google-chrome-stable --app=https://docs.google.com/document/
+Icon=winrise-google-docs
+Categories=Office;WordProcessor;
+StartupWMClass=docs.google.com__document
+TryExec=google-chrome-stable

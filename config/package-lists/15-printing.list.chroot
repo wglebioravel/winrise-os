@@ -1,0 +1,20 @@
+# Impressoras e scanners: USB, rede e Wi-Fi (driverless IPP Everywhere/AirPrint)
+cups
+cups-filters
+cups-browsed
+print-manager
+system-config-printer
+ipp-usb
+avahi-daemon
+libnss-mdns
+# Drivers: HP, Epson, Canon/genéricos (Gutenprint + Foomatic), Samsung/Xerox (SpliX), Brother
+hplip
+printer-driver-gutenprint
+foomatic-db-compressed-ppds
+printer-driver-escpr
+printer-driver-splix
+printer-driver-brlaser
+# Scanners (inclusive multifuncionais em rede via eSCL/WSD)
+sane-airscan
+sane-utils
+skanlite

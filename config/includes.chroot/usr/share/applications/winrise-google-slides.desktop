@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Google Apresentações
+Comment=Apresentações online (Google Slides)
+Exec=google-chrome-stable --app=https://docs.google.com/presentation/
+Icon=winrise-google-slides
+Categories=Office;Presentation;
+StartupWMClass=docs.google.com__presentation
+TryExec=google-chrome-stable

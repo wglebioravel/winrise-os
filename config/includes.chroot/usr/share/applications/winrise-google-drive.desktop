@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Google Drive
+Comment=Seus arquivos na nuvem (Google Drive)
+Exec=google-chrome-stable --app=https://drive.google.com/
+Icon=winrise-google-drive
+Categories=Office;FileTransfer;
+StartupWMClass=drive.google.com
+TryExec=google-chrome-stable

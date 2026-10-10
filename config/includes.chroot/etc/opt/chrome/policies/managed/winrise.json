@@ -1,0 +1,13 @@
+{
+  "MetricsReportingEnabled": false,
+  "PromotionalTabsEnabled": false,
+  "PromotionsEnabled": false,
+  "BackgroundModeEnabled": false,
+  "DefaultBrowserSettingEnabled": false,
+  "ShoppingListEnabled": false,
+  "ApplicationLocaleValue": "pt-BR",
+  "SpellcheckLanguage": [
+    "pt-BR"
+  ],
+  "BrowserSignin": 1
+}

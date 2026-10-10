@@ -1,4 +1,4 @@
-// WinRise OS — layout padrão estilo Windows 10
+// WinRise Connect OS — layout padrão estilo Windows 10
 // Barra de tarefas única embaixo: Iniciar | apps fixados + janelas | bandeja | relógio | mostrar área de trabalho
 
 var panel = new Panel;
@@ -17,8 +17,12 @@ kickoff.writeConfig("favoritesDisplay", 0);      // fixados em grade
 kickoff.writeConfig("applicationsDisplay", 1);   // categorias em lista
 kickoff.writeConfig("showActionButtonCaptions", true);
 kickoff.writeConfig("favorites", [
-    "firefox-esr.desktop",
+    "google-chrome.desktop",
     "org.kde.dolphin.desktop",
+    "winrise-google-docs.desktop",
+    "winrise-google-sheets.desktop",
+    "winrise-google-gmail.desktop",
+    "firefox-esr.desktop",
     "org.kde.kate.desktop",
     "org.kde.konsole.desktop",
     "systemsettings.desktop",
@@ -30,7 +34,7 @@ kickoff.writeConfig("favorites", [
 var tasks = panel.addWidget("org.kde.plasma.icontasks");
 tasks.currentConfigGroup = ["General"];
 tasks.writeConfig("launchers", [
-    "applications:firefox-esr.desktop",
+    "applications:google-chrome.desktop",
     "applications:org.kde.dolphin.desktop",
     "applications:org.kde.discover.desktop"
 ]);

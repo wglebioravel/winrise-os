@@ -13,3 +13,6 @@ plasma-discover-backend-flatpak
 flatpak
 # Idioma
 hunspell-pt-br
+
+# Navegador principal (repositório oficial do Google, config/archives/google-chrome.*)
+google-chrome-stable
